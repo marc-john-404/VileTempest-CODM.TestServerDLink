@@ -92,6 +92,44 @@ h1 {
     margin-top: 8px;
 }
 
+/* Refactored Maintenance Credit typography elements */
+.credits-box {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #8b8b8b;
+    line-height: 1.5;
+}
+
+.credits-link {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Refactored Native Social Sharing button structures */
+.share-area {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.btn-share {
+    background: var(--gold);
+    color: var(--bg-dark);
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+    width: auto; /* Overrides global full-width buttons block */
+}
+
+.btn-share:hover {
+    background: var(--gold-hover);
+}
+
 .last-updated {
     margin: 20px 24px;
     padding: 12px;
@@ -104,6 +142,50 @@ h1 {
 
 .last-updated strong {
     color: var(--gold);
+}
+
+/* ==========================================================================
+   3.5 NEW: DYNAMIC BUILD INFO BADGES (Injected via JS)
+   ========================================================================== */
+.build-info-wrapper {
+    margin: 14px auto 0 auto;
+    padding: 12px;
+    background: var(--surface-2);
+    border: 1px dashed var(--border-light);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.build-meta-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.badge-season {
+    background: var(--gold);
+    color: var(--surface);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.badge-date {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.build-desc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 /* ==========================================================================

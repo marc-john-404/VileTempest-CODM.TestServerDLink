@@ -4,6 +4,11 @@ const testServerData = {
     status: 1, 
 
     lastUpdated: "Jun 13, 2026",
+    
+    // Server Build Information
+    updateDescription: "New Season Battle Pass, Collaboration Themes & Weapons", 
+    season: "Season 6",         
+    releaseDate: "June 11, 2026",
 
     links: [
         {

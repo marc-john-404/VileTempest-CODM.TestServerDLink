@@ -23,17 +23,33 @@ window.onYouTubeIframeAPIReady = function() {
 function loadLinks() {
     const container = document.getElementById("linksContainer");
     const lastUpdated = document.getElementById("lastUpdated");
+    const badgeContainer = document.getElementById("buildBadgeContainer");
 
     try {
         if (typeof testServerData === "undefined") {
             throw new Error("Data not loaded");
         }
 
+        // 1. Inject the Last Updated metadata date
         lastUpdated.innerHTML = `
             <i class="fa-solid fa-rocket"></i>
             Last Updated: <strong>${testServerData.lastUpdated}</strong>
         `;
 
+        // 2. NEW: Inject the dynamic Season, Build Description, and Release Date below the title
+        if (badgeContainer) {
+            badgeContainer.innerHTML = `
+                <div class="build-info-wrapper">
+                    <div class="build-meta-row">
+                        <span class="badge-season">${testServerData.season}</span>
+                        <span class="badge-date"><i class="fa-regular fa-calendar"></i> ${testServerData.releaseDate}</span>
+                    </div>
+                    <p class="build-desc">${testServerData.updateDescription}</p>
+                </div>
+            `;
+        }
+
+        // 3. Render download card assets depending on open/closed availability state
         if (testServerData.status === 1) {
             container.innerHTML = "";
 
@@ -299,13 +315,23 @@ window.addEventListener("load", () => {
         }
     });
 
-    // Native Multi-Platform Universal Sharing Logic
+        // Native Multi-Platform Universal Sharing Logic (Dynamically updated from testServerData)
     const shareBtn = document.getElementById("shareSiteBtn");
     if (shareBtn) {
         shareBtn.addEventListener("click", () => {
+            // Fallback values just in case data fails to load
+            let shareTitle = 'CODM Test Server Download Links | MOB EXTRA';
+            let shareText = 'Get instant access to the latest official Call of Duty: Mobile Test Server download links!';
+
+            // Dynamically build the text if testServerData exists
+            if (typeof testServerData !== "undefined") {
+                shareTitle = `CODM Test Server - ${testServerData.season} Hub | MOB EXTRA`;
+                shareText = `Get instant access to the latest ${testServerData.season} build (${testServerData.updateDescription})!`;
+            }
+
             const shareData = {
-                title: 'CODM Test Server Download Links | MOB EXTRA',
-                text: 'Get instant access to the latest official Call of Duty: Mobile Test Server download links!',
+                title: shareTitle,
+                text: shareText,
                 url: window.location.href
             };
 
