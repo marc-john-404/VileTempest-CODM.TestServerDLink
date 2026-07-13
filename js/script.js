@@ -72,7 +72,12 @@ function loadLinks() {
                     <h2><i class="fa-solid fa-circle-exclamation"></i> Test Server is Closed</h2>
                     <p>The Call of Duty: Mobile Test Server is currently unavailable.</p>
                     <p>Stay tuned for future updates from the official developers.</p>
-                </div>
+                    
+                    <div class="server-reassurance-note">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Don't worry! As soon as CODM opens the next test server session, the active download links will immediately appear right here on this website.</span>
+                    </div>
+                 </div>
             `;
         }
     } catch (error) {

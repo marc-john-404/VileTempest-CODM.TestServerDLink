@@ -554,6 +554,39 @@ button.btn-locked:hover {
     letter-spacing: 0.5px;
 }
 
+/* Reassurance banner inside closed server state container */
+.server-reassurance-note {
+    display: flex;
+    flex-direction: column; /* Vertical alignment: places bell directly above text */
+    align-items: center; /* Centers both the bell and text blocks horizontally */
+    gap: 8px; /* Balanced spacing between the bell icon and text */
+    margin: 20px auto 0 auto;
+    padding: 14px 16px;
+    background: rgba(255, 210, 0, 0.05);
+    border: 1px solid rgba(255, 210, 0, 0.2);
+    border-radius: var(--radius-sm);
+    text-align: center; /* Clean, centered text paragraphs */
+    max-width: 90%;
+    box-sizing: border-box;
+}
+
+/* Gold bell alert icon tracking fixes */
+.server-reassurance-note i {
+    color: var(--gold);
+    font-size: 18px; /* Slightly larger so it looks like a clean section badge */
+    margin-top: 0;
+    margin-bottom: 2px;
+    text-shadow: 0 0 10px rgba(255, 210, 0, 0.4);
+    flex-shrink: 0;
+}
+
+/* Notice description formatting text block */
+.server-reassurance-note span {
+    color: #e2e2e2;
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 400;
+}
 
 /* API Fallback State: Script link fail/offline block */
 .load-error {
