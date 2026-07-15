@@ -22,8 +22,8 @@
     background: rgba(8, 8, 8, 0.10);
 
     /* Frosted glass effect */
-    backdrop-filter: blur(2px) brightness(0.85);
-    -webkit-backdrop-filter: blur(2px) brightness(0.85);
+    backdrop-filter: blur(2px) brightness(0.80);
+    -webkit-backdrop-filter: blur(2px) brightness(0.80);
 }
 
 /* ==========================================================
@@ -77,7 +77,7 @@
 }
 
 /* ==========================================================
-   5. ANCHOR SOURCE LINK & VIDEO CONTAINER
+   5. ANCHOR SOURCE LINK (Video Link)
 ========================================================== */
 #videoSource {
     display: block;
@@ -92,22 +92,6 @@
 #videoSource:hover {
     color: var(--gold-hover);
     text-decoration: underline;
-}
-
-.video-container {
-    width: 100%;
-    margin-bottom: 18px;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--bg-dark);
-}
-
-.video-container iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
 }
 
 /* ==========================================================
@@ -148,7 +132,7 @@
     margin-top: 3px;
 }
 
-/* 🌟 Pure CSS Checkmark vector (No external fonts/assets required) */
+/* 🌟 Pure CSS Checkmark vector */
 .checkbox-box::after {
     content: '';
     position: absolute;

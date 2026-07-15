@@ -1,14 +1,9 @@
-// Global tracking variables for the YouTube Player integration
-let ytPlayer; // Verification player
-let featuredPlayers = []; // Array to hold multiple featured video players
+// Global tracking variable for featured video players
+let featuredPlayers = []; 
 
 // 1. SINGLE Global entry point for the YouTube Iframe API
 window.onYouTubeIframeAPIReady = function() {
-    // Check if verification video needs to be built
-    if (typeof notARobot !== "undefined" && document.getElementById("verifyOverlay").style.display === "flex") {
-        setupVerificationVideoId();
-    }
-    // Initialize featured videos immediately when API is ready
+    // Only initialize featured videos now
     initFeaturedPlayers();
 };
 
@@ -123,52 +118,6 @@ function showVerification() {
     if (checkbox) checkbox.checked = false;
     
     updateButtonStatus();
-
-    // If the YT library is already available, load the player directly
-    if (window.YT && window.YT.Player) {
-        setupVerificationVideoId();
-    }
-}
-
-function setupVerificationVideoId() {
-    if (ytPlayer) return; // Prevent duplicating player instances
-
-    let videoId = "";
-    let embedUrl = notARobot.codeSource; // Matches the link source perfectly
-
-    if (embedUrl.includes("youtu.be/")) {
-        videoId = embedUrl.split("youtu.be/")[1].split("?")[0];
-    } else if (embedUrl.includes("watch?v=")) {
-        videoId = embedUrl.split("watch?v=")[1].split("&")[0];
-    }
-
-    createYTPlayer(videoId);
-}
-
-function createYTPlayer(videoId) {
-    if (!document.getElementById("videoEmbed")) return;
-
-    ytPlayer = new YT.Player('videoEmbed', {
-        height: '100%',
-        width: '100%',
-        videoId: videoId,
-        playerVars: {
-            'playsinline': 1,
-            'controls': 1,
-            'autoplay': 0,
-            'rel': 0,
-            'enablejsapi': 1,               // 🌟 Authenticates communication hooks for analytics verification
-            'origin': window.location.origin // 🌟 Transmits host domain securely to calculate valid watch sessions
-        },
-        events: {
-            'onReady': function(e) {
-                const iframe = document.getElementById('videoEmbed');
-                if (iframe) {
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                }
-            }
-        }
-    });
 }
 
 function updateButtonStatus() {
@@ -176,7 +125,6 @@ function updateButtonStatus() {
     const checkbox = document.getElementById("disclaimerCheckbox");
     if (!unlockBtn) return;
 
-    // Button only activates if user commits tracking-legitimacy via checking box
     if (checkbox && checkbox.checked) {
         unlockBtn.classList.remove("btn-locked");
         unlockBtn.innerHTML = `<i class="fa-solid fa-user-check"></i> Verify & Access Downloads`;
@@ -205,17 +153,6 @@ function unlockLinks() {
     if (code !== notARobot.code) {
         alert("Incorrect verification code.");
         return;
-    }
-
-    // 🌟 THE WATCH TIME FIX: Stop the video player immediately before hiding the overlay.
-    // This cleanly saves and submits the user's watch hours to YouTube instead of letting
-    // the video play illegally in a hidden container (which YouTube ignores/deletes).
-    if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
-        try {
-            ytPlayer.stopVideo();
-        } catch (err) {
-            console.warn("Could not stop player cleanly:", err);
-        }
     }
 
     document.getElementById("verifyOverlay").style.display = "none";
@@ -298,17 +235,14 @@ function loadFeaturedVideos() {
     html += `</div>`;
     section.innerHTML = html;
 
-    // Direct initialization invocation if API loaded ahead of the DOM structure
     if (window.YT && window.YT.Player) {
         initFeaturedPlayers();
     }
 }
 
 function initFeaturedPlayers() {
-    // We make sure 'featuredVideos' actually exists before trying to loop through it.
     if (typeof featuredVideos === "undefined") return;
-    
-    if (featuredPlayers.length > 0) return; // Prevent duplicating featured content instances
+    if (featuredPlayers.length > 0) return;
 
     featuredVideos.forEach((video, index) => {
         const elementId = `featuredPlayer_${index}`;
@@ -326,8 +260,8 @@ function initFeaturedPlayers() {
                 'controls': 1,
                 'autoplay': 0,
                 'rel': 0,
-                'enablejsapi': 1,               // 🌟 Authenticates communication hooks for analytics verification
-                'origin': window.location.origin // 🌟 Transmits host domain securely to calculate valid watch sessions
+                'enablejsapi': 1,
+                'origin': window.location.origin
             },
             events: {
                 'onReady': function(e) {
@@ -347,7 +281,6 @@ window.addEventListener("load", () => {
     waitForData();
     loadFeaturedVideos();
 
-    // Assign event listeners cleanly via addEventListener
     const unlockBtn = document.getElementById("unlockButton");
     if (unlockBtn) {
         unlockBtn.addEventListener("click", unlockLinks);
@@ -362,13 +295,11 @@ window.addEventListener("load", () => {
         });
     }
 
-    // Explicitly binding the custom checkbox input event to handle UI lock toggle states
     const disclaimerBox = document.getElementById("disclaimerCheckbox");
     if (disclaimerBox) {
         disclaimerBox.addEventListener("change", updateButtonStatus);
     }
 
-    // Collapsible Description System for Available Downloads Box
     const toggleBtn = document.getElementById("toggleIntroBtn");
     const drawer = document.getElementById("introContentDrawer");
 
@@ -386,7 +317,6 @@ window.addEventListener("load", () => {
         });
     }
 
-    // Native Multi-Platform Universal Sharing Logic (Dynamically updated from testServerData)
     const shareBtn = document.getElementById("shareSiteBtn");
     if (shareBtn) {
         shareBtn.addEventListener("click", () => {

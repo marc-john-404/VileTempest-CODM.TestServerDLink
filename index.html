@@ -50,7 +50,8 @@
           },
           notifyButton: {
             enable: true,
-            size: 'large',
+            showOnMobile: true,
+            size: 'medium',
             theme: 'dark',
             position: 'bottom-right',
             text: {
@@ -159,29 +160,24 @@
             <div class="verify-box">
               <h2>Verification Required</h2>
               <p class="verify-text">
-                To protect our server links from automated bots, please enter the required verification code. If you do not have the code yet, you can discover it inside the video walkthrough source provided below. Thank you for helping keep our community access stable!
-              </p>
-                
+                To protect our server links from automated traffic, please verify your session with the current access code. If you do not have the code, please retrieve it from our video walkthrough linked below.
+              </p>            
               <p class="code-expiry-note">
-                <i class="fa-solid fa-circle-play"></i> Note: Code changes from time to time. Always use the code from our latest video.
+                <i class="fa-solid fa-shield-halved"></i> <strong>Security Protocol:</strong> Access codes are rotated periodically to maintain server stability. Ensure you are using the active code provided in the deployment video.
               </p>
                 
               <input type="text" id="verifyCode" placeholder="Enter verification code" />
               
               <a id="videoSource" target="_blank" rel="noopener noreferrer">
-                <i class="fa-regular fa-circle-play"></i> Watch Video to Find the Code
+                <i class="fa-regular fa-circle-play"></i> Watch Video to Retrieve Code
               </a>
-                    
-              <div class="video-container">
-                <div id="videoEmbed"></div>  
-              </div>
               
               <div class="disclaimer-checkbox-container">
                 <label class="custom-checkbox-label">
                   <input type="checkbox" id="disclaimerCheckbox" />
                   <span class="checkbox-box"></span>
                   <span class="checkbox-text">
-                    I acknowledge that <strong>MOB EXTRA</strong> acts strictly as a community directory sharing official public developer links. I agree that this site does not host, modify, or assume any responsibility or liability for these external packages, and I proceed entirely at my own discretion.
+                    I acknowledge that <strong>MOB EXTRA</strong> acts as an independent portal for official developer links. I agree that <strong>MOB EXTRA</strong> does not host these packages and is not responsible for their content. I proceed at my own risk and discretion.
                   </span>
                 </label>
               </div>
