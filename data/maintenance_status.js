@@ -5,7 +5,7 @@
  */
 const maintenanceConfig = {
     // 1 = Active (Show maintenance window) | 0 = Inactive (Normal site)
-    isUnderMaintenance: 1,
+    isUnderMaintenance: 0,
 
     // 1 = Critical (Hides the 'Proceed Anyway' button entirely)
     // 0 = Optional (Displays the button so users can look at the UI anyway)
