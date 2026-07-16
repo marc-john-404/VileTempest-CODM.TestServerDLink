@@ -23,7 +23,7 @@
 
     <meta property="og:title" content="CODM Public Test Build Download Hub | MOB EXTRA" />
     <meta property="og:description" content="Quick, direct access to the official Call of Duty: Mobile Public Test Build for iOS and Android." />
-    <meta property="og:image" content="assets/images/favicon.png" />
+    <meta property="og:image" content="https://mob-extra.github.io/CODM.TestServer.DL.Link/assets/images/favicon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mob-extra.github.io/CODM.TestServer.DL.Link/" />
     
@@ -37,34 +37,8 @@
     
     <link rel="stylesheet" href="site-status/maintenance.css" />
 
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "4b75140a-e41f-40c1-8181-32ee5635f953",
-          allowLocalhostAsSecureOrigin: true,
-          serviceWorkerPath: "OneSignalSDKWorker.js",
-          serviceWorkerParam: {
-            scope: "/CODM.TestServer.DL.Link/"
-          },
-          notifyButton: {
-            enable: true,
-            showOnMobile: true,
-            size: 'medium',
-            theme: 'dark',
-            position: 'bottom-right',
-            text: {
-              'tip.state.unsubscribed': 'Get Test Build Alerts',
-              'tip.state.subscribed': "You're all set!",
-              'dialog.main.title': 'Public Test Build Updates',
-              'dialog.main.button.subscribe': 'NOTIFY ME',
-              'dialog.main.button.unsubscribe': 'STOP ALERTS'
-            }
-          }
-        });
-      });
-    </script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> 
+    <script src="assets/js/onesignal-init.js" defer></script>
 
   </head>
   <body>
@@ -72,18 +46,22 @@
     <div class="mobile-container">
       <div class="card">
         
-        <img src="assets/images/codm-logo.png" alt="Call of Duty Mobile" class="codm-logo" />
-        
+        <div class="logo-wrapper">
+            <img src="assets/images/site-logo.png" alt="Call of Duty Mobile" class="site-logo" />
+            <div class="loading-line"></div>
+        </div>
+
         <div class="header">
+          <p class="unofficial-notice">Unofficial Community Resource</p>     
           <h1>CODM Public Test Build</h1>
-          <p class="subtitle">Official Public Beta & Test Build Hub</p>
-          
+          <p class="subtitle">Community Public Beta & Test Build Hub</p>
+            
           <div id="buildBadgeContainer"></div>
-          
+  
           <div class="credits-box">
             <span>Developed & Maintained by</span><br />
             <a href="https://www.youtube.com/channel/UCbDtYZS08VvB6luAcyn08bQ" target="_blank" rel="noopener noreferrer" class="credits-link">
-              Vile Tempest @ MOB EXTRA
+              Vile Tempest Official @ MOB EXTRA
             </a>
           </div>
 
@@ -92,6 +70,7 @@
               <i class="fa-solid fa-share-nodes"></i> Share This Site
             </button>
           </div>
+          
         </div>
 
         <div id="lastUpdated" class="last-updated">
@@ -208,15 +187,15 @@
         
         <div class="logo-group">
           <a href="https://www.youtube.com/channel/UCy94xzTQg2fTBQz4LD9ZBoA" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/MOBMundane.png" alt="MOB Mundane Logo" class="site-logo" />
+            <img src="assets/images/MOBMundane.png" alt="MOB Mundane Logo" class="yt-channels-logo" />
           </a>
         
           <a href="https://www.youtube.com/channel/UCbDtYZS08VvB6luAcyn08bQ" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/VileTempestOfficial.png" alt="Vile Tempest Official Logo" class="site-logo" />
+            <img src="assets/images/VileTempestOfficial.png" alt="Vile Tempest Official Logo" class="yt-channels-logo" />
           </a>
         
           <a href="https://www.youtube.com/channel/UCjUlbQgLin9oQPiyG6l4z-g" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/InfreeniteMOBSolutions.png" alt="Infreenite MOB Solutions Logo" class="site-logo" />
+            <img src="assets/images/InfreeniteMOBSolutions.png" alt="Infreenite MOB Solutions Logo" class="yt-channels-logo" />
           </a>
         </div>
       
@@ -234,7 +213,7 @@
           <div class="footer-powered">
             Powered by 
             <a href="https://www.youtube.com/channel/UCbDtYZS08VvB6luAcyn08bQ" target="_blank" rel="noopener noreferrer" class="credit-link">
-              <strong>Vile Tempest</strong>
+              <strong>Vile Tempest Official</strong>
             </a>
           </div>
         </footer>

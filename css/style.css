@@ -5,27 +5,28 @@
 
 :root {
     --bg: #050505;
-    --bg-dark: #000000;         /* Added for crisp black backdrops */
+    --bg-dark: #000000;         
     --surface: #111111;
     --surface-2: #181818;
     --border: #303030;
     --border-light: #404040;
     --text: #ffffff;
     --text-muted: #bdbdbd;
-    --gold: #ffd200;
-    --gold-hover: #ffe15c;
+    --gold: #FFB800;           
+    --gold-hover: #FFC840;
     --blue: #2b7bd8;
     --blue-hover: #1d6cc7;
     --link: #66aaff;
     --success: #25c26e;
     --warning: #fbbf24;
     --danger: #ef4444;
-    --bg-error: #350c0c;        /* Added for error/critical state blocks */
+    --bg-error: #350c0c;        
     --radius: 18px;
-    --radius-sm: 10px;          /* Scaled radii variable to match your utility boxes */
-    --radius-md: 14px;          /* Scaled radii variable to match your content boxes */
+    --radius-sm: 10px;          
+    --radius-md: 14px;          
     --shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
+
 
 /* ==========================================================================
    2. GLOBAL RESET & BASE STYLES
@@ -66,15 +67,65 @@ body {
 /* ==========================================================================
    3. HEADER & HERO DESIGN ELEMENTS
    ========================================================================== */
-.codm-logo {
+/* Container for the logo + animated line */
+.logo-wrapper {
+    position: relative;
+    width: 100%;
+    background: var(--bg-dark);
+}
+
+/* Updated logo style (border removed) */
+.site-logo {
     display: block;
     width: 100%;
     background: var(--bg-dark);
-    border-bottom: 2px solid var(--gold);
+}
+
+/* The loading line container */
+.loading-line {
+    width: 100%;
+    height: 3px;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Adjusted percentages for a smaller gap */
+    background: linear-gradient(
+        90deg, 
+        var(--gold) 0%, var(--gold) 45%,      /* Bar 1 ends at 45% */
+        transparent 45%, transparent 50%,     /* Gap 1 (5% wide) */
+        var(--gold) 50%, var(--gold) 95%,     /* Bar 2 ends at 95% */
+        transparent 95%, transparent 100%     /* Gap 2 (5% wide) */
+    );
+    
+    background-size: 200% 100%;
+    box-shadow: 0 0 10px var(--gold);
+    animation: loading-slide 3s linear infinite;
 }
 
 .header {
-    padding: 26px 24px 4px;
+    padding: 24px 22px 4px;
+}
+
+.unofficial-notice {
+    display: block;
+    text-align: center;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    opacity: 0.85;
 }
 
 h1 {
@@ -131,18 +182,37 @@ h1 {
 }
 
 .last-updated {
-    margin: 20px 24px;
-    padding: 12px;
-    background: var(--surface-2);
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    text-align: center;
+    margin: 10px 24px; /* Reduced vertical gap */
+    padding: 8px 12px; /* Slimmer */
+    background: rgba(255, 255, 255, 0.03); /* Subtle, non-intrusive background */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    
+    /* Centering everything nicely */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    
+    font-size: 14px;
     color: var(--text-muted);
 }
 
 .last-updated strong {
     color: var(--gold);
 }
+
+.lu-status-badge {
+    background-color: var(--success);
+    font-size: 12px;
+    color: #000000;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulseGlowGreen 1.8s infinite alternate;
+}
+
 
 /* ==========================================================================
    3.5 NEW: DYNAMIC BUILD INFO BADGES (Injected via JS)
@@ -612,7 +682,7 @@ button.btn-locked:hover {
 }
 
 /* Individual logo adjustments */
-.site-logo {
+.yt-channels-logo {
     display: block;          /* Removes any default inline whitespace gaps */
     max-width: 20px;
     height: auto;
@@ -621,7 +691,7 @@ button.btn-locked:hover {
     border-radius: 50%;
 }
 
-.logo-group a:nth-child(2) .site-logo {
+.logo-group a:nth-child(2) .yt-channels-logo {
     max-width: 35px; 
 }
 
@@ -713,6 +783,11 @@ button.btn-locked:hover {
     100% {
         box-shadow: 0 0 0 rgba(239, 68, 68, 0.3);
     }
+}
+
+@keyframes loading-slide {
+    0% { background-position: 0% 0; }
+    100% { background-position: -100% 0; }
 }
 
 /* ==========================================================================

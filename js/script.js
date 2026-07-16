@@ -25,13 +25,18 @@ function loadLinks() {
             throw new Error("Data not loaded");
         }
 
-        // 1. Inject the Last Updated metadata date
+        // 1. Define Badge Logic
+        let statusBadge = "";
+        if (testServerData.status === 1) {
+            statusBadge = `<span class="lu-status-badge">Online</span>`;
+        }
+
+        // 2. Inject the Last Updated metadata date and Status Badge (Only once)
         lastUpdated.innerHTML = `
-            <i class="fa-solid fa-rocket"></i>
-            Last Updated: <strong>${testServerData.lastUpdated}</strong>
+            ${statusBadge} Last Updated: <strong>${testServerData.lastUpdated}</strong>
         `;
 
-        // 2. Inject the dynamic Season, Build Description, and Release Date below the title
+        // 3. Inject the dynamic Season/Build Info
         if (badgeContainer) {
             badgeContainer.innerHTML = `
                 <div class="build-info-wrapper">
@@ -44,10 +49,9 @@ function loadLinks() {
             `;
         }
 
-        // 3. Render download card assets depending on open/closed availability state
+        // 4. Render download card assets
         if (testServerData.status === 1) {
             container.innerHTML = "";
-
             testServerData.links.forEach((link, index) => {
                 container.innerHTML += `
                     <div class="link-box">
@@ -59,7 +63,6 @@ function loadLinks() {
                     </div>
                 `;
             });
-
             showVerification();
         } else {
             container.innerHTML = `
@@ -67,7 +70,6 @@ function loadLinks() {
                     <h2><i class="fa-solid fa-circle-exclamation"></i> Public Test Build Closed</h2>
                     <p>The Call of Duty: Mobile Public Test Build is currently unavailable.</p>
                     <p>Stay tuned for future updates from the official developers.</p>
-                    
                     <div class="server-reassurance-note">
                         <i class="fa-solid fa-bell"></i>
                         <span>Don't worry! As soon as the developers launch the next Public Test Build session, the active download links will immediately appear right here on this website.</span>
@@ -77,17 +79,16 @@ function loadLinks() {
         }
     } catch (error) {
         lastUpdated.innerHTML = `<i class="fa-solid fa-rocket"></i> Last Updated: <strong>Unavailable</strong>`;
-        
         container.innerHTML = `
             <div class="load-error">
                 <h2><i class="fa-solid fa-triangle-exclamation"></i> Unable to Load Download Links</h2>
                 <p>The download link data could not be loaded at this time.</p>
-                <p>Please refresh the page and try again. If the issue persists, the download link data may be temporarily unavailable.</p>
             </div>
         `;
         console.error(error);
     }
 }
+
 
 function copyLink(id, button) {
     const text = document.getElementById(id).innerText.trim();
@@ -160,6 +161,7 @@ function unlockLinks() {
 
 function waitForData() {
     const container = document.getElementById("linksContainer");
+    const FAKE_DELAY = 5000; 
     let dots = 1;
 
     container.innerHTML = `
@@ -180,13 +182,17 @@ function waitForData() {
     }, 300);
 
     const startTime = Date.now();
+
+    // Check for data loop
     const checkData = setInterval(() => {
         if (typeof testServerData !== "undefined" && typeof notARobot !== "undefined") {
             clearInterval(checkData);
 
+            // Calculate how much time is left to reach the 10s goal
             const elapsed = Date.now() - startTime;
-            const remaining = Math.max(0, 1000 - elapsed);
+            const remaining = Math.max(0, FAKE_DELAY - elapsed);
 
+            // Wait for the remainder of the 10 seconds
             setTimeout(() => {
                 clearInterval(loadingAnimation);
                 loadLinks();
@@ -194,14 +200,14 @@ function waitForData() {
         }
     }, 100);
 
+    // Fallback: If data takes longer than 10.5s or fails to load, force finish
     setTimeout(() => {
-        if (typeof testServerData === "undefined" || typeof notARobot === "undefined") {
-            clearInterval(checkData);
-            clearInterval(loadingAnimation);
-            loadLinks();
-        }
-    }, 3000);
+        clearInterval(checkData);
+        clearInterval(loadingAnimation);
+        loadLinks();
+    }, FAKE_DELAY + 500);
 }
+
 
 function loadFeaturedVideos() {
     const section = document.getElementById("featuredVideosSection");

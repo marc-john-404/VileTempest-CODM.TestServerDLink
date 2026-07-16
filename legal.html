@@ -12,11 +12,27 @@
       .legal-content .legal-last-updated { margin-bottom: 10px; }
       .legal-content h2 { font-family: "Oswald", sans-serif; color: var(--gold); text-transform: uppercase; font-size: 20px; margin: 24px 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
       .back-btn { display: inline-block; margin-bottom: 20px; color: var(--gold); text-decoration: none; font-weight: bold; font-size: 14px; }
+      
       .tab-nav { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 20px; gap: 10px; }
       .tab-link { font-family: "Oswald", sans-serif; padding: 10px 16px; color: var(--text-muted); text-decoration: none; cursor: pointer; font-size: 16px; text-transform: uppercase; }
       .tab-link.active { color: var(--gold); border-bottom: 2px solid var(--gold); margin-bottom: -2px; }
+      
       .policy-section { display: none; }
       .policy-section.active { display: block; }
+
+      /* Styled Footer */
+      .site-footer { 
+        padding: 40px 20px 20px 20px; 
+        text-align: center; 
+        border-top: 1px solid var(--border); 
+        margin-top: 40px; 
+        color: var(--text-muted); 
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .site-footer strong {
+        color: var(--gold);
+      }
     </style>
   </head>
   <body>
@@ -30,6 +46,7 @@
             <span id="tabTerms" class="tab-link" onclick="switchTab('terms')">Terms of Service</span>
           </div>
 
+          <!-- Privacy Policy Section -->
           <div id="privacySection" class="policy-section active">
             <p class="legal-last-updated"><strong>Last Updated:</strong> July 16, 2026</p> 
             <p>MOB EXTRA prioritizes the privacy and security of our visitors. This policy explains how we handle data and the services we employ to improve your experience.</p>
@@ -55,12 +72,13 @@
             <p>We use Google Analytics to maintain site performance. Third-party providers operate under their own privacy policies. By using this site, you acknowledge the use of these standard internet technologies.</p>
           </div>
 
+          <!-- Terms of Service Section -->
           <div id="termsSection" class="policy-section">
             <p class="legal-last-updated"><strong>Last Updated:</strong> July 16, 2026</p>
             <p>By accessing the MOB EXTRA download hub, you agree to these terms.</p>
             
             <h2>1. Independent Platform</h2>
-            <p>MOB EXTRA is an independent community resource. We are <strong>not affiliated, endorsed, or associated with Activision, TiMi Studio Group, Tencent Games, or Garena.</strong> All trademarks belong to their respective owners.</p>
+            <p>MOB EXTRA is an independent community resource operated by <strong>Vile Tempest Official</strong>. We are <strong>not affiliated, endorsed, or associated with Activision, TiMi Studio Group, Tencent Games, or Garena.</strong> All trademarks belong to their respective owners.</p>
 
             <h2>2. Notifications & Communication</h2>
             <p>Our push notification feature is provided "as is." While we strive to ensure timely delivery, network delays or browser restrictions are outside our control. You are responsible for managing your notification subscription status.</p>
@@ -73,9 +91,11 @@
           </div>
         </div>
         
-        <div class="site-footer" style="padding-bottom: 20px;">
-          &copy; 2026 <strong>MOB EXTRA</strong> | Privacy by Design
-        </div>
+        <footer class="site-footer">
+          &copy; 2026 <strong>MOB EXTRA</strong><br />
+          Operated by <strong>Vile Tempest Official</strong><br />
+          Privacy by Design
+        </footer>
       </div>
     </div>
 

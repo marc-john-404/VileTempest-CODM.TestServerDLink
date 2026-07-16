@@ -220,7 +220,7 @@
                     <span class="brand-subtext">
                         MOB EXTRA &bull; 
                         <a href="https://www.youtube.com/channel/UCbDtYZS08VvB6luAcyn08bQ" target="_blank" rel="noopener noreferrer" class="footer-creator-link">
-                            Vile Tempest
+                            Vile Tempest Official
                         </a>
                     </span>
                 </div>
