@@ -55,9 +55,14 @@ function loadLinks() {
                 <div class="link-box">
                     <div class="link-title">${link.device}</div>
                     <div class="link" id="link${index}">${link.url}</div>
-                    <button onclick="copyLink('link${index}', this)">
-                         <i class="fa-regular fa-copy"></i> Copy Link
-                    </button>
+                    <div class="link-actions">
+                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="download-btn">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                        <button onclick="copyLink('link${index}', this)">
+                             <i class="fa-regular fa-copy"></i> Copy Link
+                        </button>
+                    </div>
                 </div>
             `).join('');
             
