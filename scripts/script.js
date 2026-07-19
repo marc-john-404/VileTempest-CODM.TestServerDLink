@@ -220,20 +220,20 @@ function waitForData() {
     const FAKE_DELAY = 5000; // adjustable delay
     
     const statusMessages = [
-        "Checking server status...",
-        "Retrieving local manifest...",
-        "Validating configurations...",
-        "Checking Server Status..."
+        "Establishing connection to deployment node...",
+        "Authenticating server manifest...",
+        "Syncing configuration protocols...",
+        "Secure handshake verified."
     ];
     
     const linkMessages = [
-        `<i class="fa-solid fa-magnifying-glass"></i> Loading iOS build details...`,
-        `<i class="fa-regular fa-circle-check"></i> Loading iOS build details...`,
-        `<i class="fa-solid fa-magnifying-glass"></i> Loading Android 32-bit data...`,
-        `<i class="fa-regular fa-circle-check"></i> Loading Android 32-bit data...`,
-        `<i class="fa-solid fa-magnifying-glass"></i> Loading Android 64-bit data...`,
-        `<i class="fa-regular fa-circle-check"></i> Loading Android 64-bit data...`,
-        `Preparing interface...`
+        `<i class="fa-solid fa-magnifying-glass"></i> Syncing iOS TestFlight registry...`,
+        `<i class="fa-regular fa-circle-check"></i> iOS registry validated.`,
+        `<i class="fa-solid fa-magnifying-glass"></i> Syncing Android (32-bit) assets...`,
+        `<i class="fa-regular fa-circle-check"></i> Android (32-bit) assets cached.`,
+        `<i class="fa-solid fa-magnifying-glass"></i> Syncing Android (64-bit) assets...`,
+        `<i class="fa-regular fa-circle-check"></i> Android (64-bit) assets cached.`,
+        `Finalizing deployment interface...`
     ];
     
     setLoaderState('start');
