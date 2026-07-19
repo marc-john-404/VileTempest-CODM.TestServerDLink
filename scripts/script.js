@@ -173,32 +173,60 @@ function setLoaderState(state) {
             loader.classList.remove("active");
             loader.classList.add("finished");
         });
+        document.getElementById('mainContentSection').style.display = 'block';
     }
 }
 
+/**
+ * Animates text updates over a set duration.
+ * @param {string} elementId - The ID of the span to update.
+ * @param {Array} messages - The array of strings to cycle through.
+ * @param {number} duration - Total time in ms.
+ */
+function animateTextSequence(elementId, messages, duration) {
+    const element = document.getElementById(elementId);
+    if (!element) return null;
+
+    const intervalTime = duration / messages.length;
+    let index = 0;
+
+    // Set first message immediately
+    element.textContent = messages[0];
+
+    const timer = setInterval(() => {
+        index++;
+        if (index < messages.length) {
+            element.textContent = messages[index];
+        } else {
+            clearInterval(timer);
+        }
+    }, intervalTime);
+
+    return timer; // Return timer so we can clear it if data loads early
+}
+
 function waitForData() {
-    const container = document.getElementById("linksContainer");
-    const FAKE_DELAY = 5000; 
-    let dots = 1;
+    const FAKE_DELAY = 5000; // adjustable delay
+    
+    const statusMessages = [
+        "Checking server status...",
+        "Retrieving local manifest...",
+        "Validating configurations...",
+        "Checking Server Status..."
+    ];
+    
+    const linkMessages = [
+        "Loading iOS build details...",
+        "Loading Android 32-bit data...",
+        "Loading Android 64-bit data...",
+        "Preparing interface..."
+    ];
     
     setLoaderState('start');
 
-    container.innerHTML = `
-        <div class="loading-box">
-            <div class="loader"></div>
-            <p id="loadingText">Loading official download links.</p>
-        </div>
-    `;
-
-    const loadingText = document.getElementById("loadingText");
-    const loadingAnimation = setInterval(() => {
-        loadingText.textContent = "Loading official download links" + ".".repeat(dots);
-        dots++;
-        
-        if (dots > 3) {
-            dots = 1;
-        }
-    }, 300);
+    // Start both animations
+    const statusTimer = animateTextSequence('statusMsg', statusMessages, FAKE_DELAY);
+    const linksTimer = animateTextSequence('loadingText', linkMessages, FAKE_DELAY);
 
     const startTime = Date.now();
 
@@ -207,28 +235,28 @@ function waitForData() {
         if (typeof testServerData !== "undefined" && typeof notARobot !== "undefined") {
             clearInterval(checkData);
 
-            // Calculate how much time is left to reach the 10s goal
             const elapsed = Date.now() - startTime;
             const remaining = Math.max(0, FAKE_DELAY - elapsed);
 
-            // Wait for the remainder of the 10 seconds
             setTimeout(() => {
+                // Clear both timers
+                clearInterval(statusTimer);
+                clearInterval(linksTimer);
                 setLoaderState('finish');
-                clearInterval(loadingAnimation);
                 loadLinks();
             }, remaining);
         }
     }, 100);
 
-    // Fallback: If data takes longer than 10.5s or fails to load, force finish
+    // Safety Fallback
     setTimeout(() => {
         setLoaderState('finish');
         clearInterval(checkData);
-        clearInterval(loadingAnimation);
+        clearInterval(statusTimer);
+        clearInterval(linksTimer);
         loadLinks();
     }, FAKE_DELAY + 500);
 }
-
 
 function loadFeaturedVideos() {
     const section = document.getElementById("featuredVideosSection");

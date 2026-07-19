@@ -78,65 +78,70 @@
             <button id="shareSiteBtn" class="btn-share">
               <i class="fa-solid fa-share-nodes"></i> Share This Site
             </button>
-          </div>
-          
+          </div>    
         </div>
 
         <div id="lastUpdated" class="last-updated progress-loader">
-          <i class="fa-solid fa-rocket"></i> Checking Server Status...
-        </div>
-        
-        <div class="info-box">
-          <h3>What is the CODM Public Test Build?</h3>
-          <p>
-            The CODM Public Test Build (also known as the <strong>CODM Test Server</strong>) is an early-access environment released by the developers. It allows players to experience upcoming game updates, new maps, weapons, and balance changes before they are launched in the official version.
-          </p>
+          <i class="fa-solid fa-rocket"></i> <span id="statusMsg">Checking Server Status...</span>
         </div>
 
-        <div class="intro-box">
-          <h2>Available Downloads</h2>
-          <p>
-            Access the newest official public test builds deployed by the developers. Please select the appropriate package file optimized for your mobile device specifications below:
-          </p>
-          
-          <div id="introContentDrawer" class="intro-drawer">
-            <ul>
-              <li>
-                <strong>
-                  <i class="fa-brands fa-apple"></i> iOS Build (Apple TestFlight)
-                </strong>
-                <br />
-                Designed for iPhone and iPad environments. Requires Apple's native TestFlight application. <em>Note: Slot capacity is limited by developer project pools.</em>
-              </li>
-              <li>
-                <strong>
-                  <i class="fa-brands fa-android"></i> Android Build (32-Bit)
-                </strong>
-                <br />
-                Legacy deployment optimized for older mobile chipsets or budget hardware configurations.
-              </li>
-              <li>
-                <strong>
-                  <i class="fa-brands fa-android"></i> Android Build (64-Bit)
-                </strong>
-                <br />
-                High-performance deployment package recommended for modern Android devices using up-to-date processors.
-              </li>
-            </ul>
-            <p>
-              If you are uncertain about your processor configuration, the <strong>64-bit build</strong> provides optimal compatibility and stability on newer flagship devices.
-            </p>
-          </div>
+        <!-- WRAPPER START: This hides the content until the loading finishes -->
+        <div id="mainContentSection" style="display: none;">
+            <div class="info-box">
+              <h3>What is the CODM Public Test Build?</h3>
+              <p>
+                The CODM Public Test Build (also known as the <strong>CODM Test Server</strong>) is an early-access environment released by the developers. It allows players to experience upcoming game updates, new maps, weapons, and balance changes before they are launched in the official version.
+              </p>
+            </div>
 
-          <button id="toggleIntroBtn" class="btn-toggle-intro">
-            <span>Read More</span> <i class="fa-solid fa-chevron-down"></i>
-          </button>
+            <div class="intro-box">
+              <h2>Available Downloads</h2>
+              <p>
+                Access the newest official public test builds deployed by the developers. Please select the appropriate package file optimized for your mobile device specifications below:
+              </p>
+              
+              <div id="introContentDrawer" class="intro-drawer">
+                <ul>
+                  <li>
+                    <strong>
+                      <i class="fa-brands fa-apple"></i> iOS Build (Apple TestFlight)
+                    </strong>
+                    <br />
+                    Designed for iPhone and iPad environments. Requires Apple's native TestFlight application. <em>Note: Slot capacity is limited by developer project pools.</em>
+                  </li>
+                  <li>
+                    <strong>
+                      <i class="fa-brands fa-android"></i> Android Build (32-Bit)
+                    </strong>
+                    <br />
+                    Legacy deployment optimized for older mobile chipsets or budget hardware configurations.
+                  </li>
+                  <li>
+                    <strong>
+                      <i class="fa-brands fa-android"></i> Android Build (64-Bit)
+                    </strong>
+                    <br />
+                    High-performance deployment package recommended for modern Android devices using up-to-date processors.
+                  </li>
+                </ul>
+                <p>
+                  If you are uncertain about your processor configuration, the <strong>64-bit build</strong> provides optimal compatibility and stability on newer flagship devices.
+                </p>
+              </div>
+
+              <button id="toggleIntroBtn" class="btn-toggle-intro">
+                <span>Read More</span> <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
         </div>
-
+        <!-- WRAPPER END -->
         
         <div class="links-wrapper">
           <div id="linksContainer">
-            <div class="disclaimer">Loading official download links...</div>
+            <div class="loading-box">
+                <div class="loader"></div>
+                <p id="loadingText">Loading official download links...</p>
+            </div>
           </div>
           <!-- SEO Fallback -->
           <noscript>
