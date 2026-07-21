@@ -15,6 +15,29 @@ window.onYouTubeIframeAPIReady = function() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 })();
 
+/**
+ * Helper function to generate the HTML string for all download links.
+ * Prevents code duplication between active and forced states.
+ */
+function renderLinksHtml() {
+    if (typeof testServerData === "undefined" || !testServerData.links) return "";
+
+    return testServerData.links.map((link, index) => `
+        <div class="link-box">
+            <div class="link-title">${link.device}</div>
+            <div class="link" id="link${index}">${link.url}</div>
+            <div class="link-actions">
+                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="download-btn">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+                <button onclick="copyLink('link${index}', this)">
+                     <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
 function loadLinks() {
     const container = document.getElementById("linksContainer");
     const lastUpdated = document.getElementById("lastUpdated");
@@ -51,23 +74,8 @@ function loadLinks() {
 
         // 4. Render download card assets
         if (testServerData.status === 1) {
-            const html = testServerData.links.map((link, index) => `
-                <div class="link-box">
-                    <div class="link-title">${link.device}</div>
-                    <div class="link" id="link${index}">${link.url}</div>
-                    <div class="link-actions">
-                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="download-btn">
-                            <i class="fa-solid fa-download"></i> Download
-                        </a>
-                        <button onclick="copyLink('link${index}', this)">
-                             <i class="fa-regular fa-copy"></i> Copy Link
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-            
-            container.innerHTML = html;
-            showVerification();
+            container.innerHTML = renderLinksHtml();
+            showVerification(); // Verification required when server is online
         } else {
             container.innerHTML = `
                 <div class="server-closed">
@@ -78,6 +86,9 @@ function loadLinks() {
                         <i class="fa-solid fa-bell fa-swing"></i>
                         <span>Don't worry! As soon as the developers launch the next Public Test Build session, the active download links will immediately appear right here on this website.</span>
                     </div>
+                    <button onclick="forceShowLinks()" class="show-links">
+                        <i class="fa-solid fa-eye"></i> View Current Links Anyway
+                    </button>
                  </div>
             `;
         }
@@ -93,6 +104,13 @@ function loadLinks() {
     }
 }
 
+function forceShowLinks() {
+    const container = document.getElementById("linksContainer");
+    if (typeof testServerData === "undefined" || !testServerData.links) return;
+
+    container.innerHTML = renderLinksHtml();
+    // Bypasses showVerification() entirely when server is closed!
+}
 
 function copyLink(id, button) {
     const text = document.getElementById(id).innerText.trim();
@@ -219,7 +237,6 @@ function animateTextSequence(elementId, messages, duration) {
 
     return timer;
 }
-
 
 function waitForData() {
     const FAKE_DELAY = 5000; // adjustable delay
